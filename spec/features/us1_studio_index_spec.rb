@@ -8,39 +8,39 @@ describe 'us1 - Studio Index' do
 
     movie01 = studio1.movies.create(title: "movie01", year: "2001", genre: "genre1")
     movie11 = studio1.movies.create(title: "movie11", year: "2011", genre: "genre2")
-    movie02 = studio1.movies.create(title: "movie02", year: "2002", genre: "genre1")
-    movie22 = studio1.movies.create(title: "movie22", year: "2022", genre: "genre2")
-    movie03 = studio1.movies.create(title: "movie03", year: "2003", genre: "genre1")
-    movie33 = studio1.movies.create(title: "movie33", year: "2033", genre: "genre2")
+    movie02 = studio2.movies.create(title: "movie02", year: "2002", genre: "genre1")
+    movie22 = studio2.movies.create(title: "movie22", year: "2022", genre: "genre2")
+    movie03 = studio3.movies.create(title: "movie03", year: "2003", genre: "genre1")
+    movie33 = studio3.movies.create(title: "movie33", year: "2033", genre: "genre2")
 
     visit "/studios"
 
     within("#studio-#{studio1.id}")do
-      exepect(page).to have_content("Studio: #{studio1.name}")
-      exepect(page).to have_content("Movies:")
-      exepect(page).to have_link(movie01.name)
-      exepect(page).to have_link(movie11.name)
-      exepect(page).to_not have_link(movie02.name)
-      exepect(page).to_not have_link(movie33.name)
+      expect(page).to have_content("Studio: #{studio1.name}")
+      expect(page).to have_content("Movies:")
+      expect(page).to have_link(movie01.title)
+      expect(page).to have_link(movie11.title)
+      expect(page).to_not have_link(movie02.title)
+      expect(page).to_not have_link(movie33.title)
     end
     within("#studio-#{studio2.id}")do
-      exepect(page).to have_content("Studio: #{studio2.name}")
-      exepect(page).to have_content("Movies:")
-      exepect(page).to have_link(movie02.name)
-      exepect(page).to have_link(movie22.name)
-      exepect(page).to_not have_link(movie01.name)
-      exepect(page).to_not have_link(movie33.name)
+      expect(page).to have_content("Studio: #{studio2.name}")
+      expect(page).to have_content("Movies:")
+      expect(page).to have_link(movie02.title)
+      expect(page).to have_link(movie22.title)
+      expect(page).to_not have_link(movie01.title)
+      expect(page).to_not have_link(movie33.title)
     end
     within("#studio-#{studio3.id}")do
-      exepect(page).to have_content("Studio: #{studio3.name}")
-      exepect(page).to have_content("Movies:")
-      exepect(page).to have_link(movie03.name)
-      exepect(page).to have_link(movie33.name)
-      exepect(page).to_not have_link(movie01.name)
-      exepect(page).to_not have_link(movie22.name)
-      click_link(movie03.name)
+      expect(page).to have_content("Studio: #{studio3.name}")
+      expect(page).to have_content("Movies:")
+      expect(page).to have_link(movie03.title)
+      expect(page).to have_link(movie33.title)
+      expect(page).to_not have_link(movie01.title)
+      expect(page).to_not have_link(movie22.title)
+      click_link(movie03.title)
     end
-    expect(current_path).to eq("/studios/#{studio3.id}/movies")
+    expect(current_path).to eq("/movies/#{movie03.id}")
 
 
   end
