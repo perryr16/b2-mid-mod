@@ -18,7 +18,6 @@ describe 'us2 - Movie Index' do
     visit "/movies/#{movie01.id}"
 
     within("#actors")do
-      expect(page).to_not have_content("Title: #{movie01.title}")
       expect(page.all('.actor_link')[0]).to have_link(actor100.name)
       expect(page.all('.actor_link')[1]).to have_link(actor110.name)
       expect(page.all('.actor_link')[2]).to have_link(actor111.name)
@@ -34,7 +33,6 @@ describe 'us2 - Movie Index' do
     expect(current_path).to eq("/movies/#{movie01.id}")
 
     within("#actors")do
-      expect(page).to_not have_content("Title: #{movie01.title}")
       expect(page.all('.actor_link')[0]).to have_link(actor100.name)
       expect(page.all('.actor_link')[1]).to have_link(actor103.name)
       expect(page.all('.actor_link')[2]).to have_link(actor110.name)
