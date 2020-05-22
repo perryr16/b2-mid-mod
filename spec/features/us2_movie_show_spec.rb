@@ -5,10 +5,12 @@ describe 'us2 - Movie Index' do
     studio1 = Studio.create(name: "studio01", location: "location01")
 
     movie01 = studio1.movies.create(title: "movie01", year: "2001", genre: "genre1")
+    movie02 = studio1.movies.create(title: "movie02", year: "2002", genre: "genre2")
 
     actor111 = Actor.create(name: "name111", age: 111)
     actor100 = Actor.create(name: "name100", age: 100)
     actor110 = Actor.create(name: "name110", age: 110)
+    actor999 = Actor.create(name: "name999", age: 999)
 
     MovieActor.create(movie_id: movie01.id, actor_id: actor111.id)
     MovieActor.create(movie_id: movie01.id, actor_id: actor100.id)
@@ -20,6 +22,9 @@ describe 'us2 - Movie Index' do
       expect(page).to have_content("Title: #{movie01.title}")
       expect(page).to have_content("Creation Year: #{movie01.year}")
       expect(page).to have_content("Genre: #{movie01.genre}")
+      expect(page).to_not have_content("Title: #{movie02.title}")
+      expect(page).to_not have_content("Creation Year: #{movie02.year}")
+      expect(page).to_not have_content("Genre: #{movie02.genre}")
       expect(page).not_to have_content(actor100.name)
       expect(page).not_to have_content(actor110.age)
     end
@@ -29,6 +34,7 @@ describe 'us2 - Movie Index' do
       expect(page.all('.actor_link')[0]).to have_link(actor100.name)
       expect(page.all('.actor_link')[1]).to have_link(actor110.name)
       expect(page.all('.actor_link')[2]).to have_link(actor111.name)
+      expect(page).to_not have_content(actor999.name)
       expect(page).to have_content("Average Actor Age: #{movie01.avg_actor_age}")
       click_link(actor100.name)
     end

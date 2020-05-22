@@ -2,6 +2,7 @@
 
   <section id="studio-<%= studio.id %>">
     <h1>Studio: <%= studio.name %></h1>
+    <p>Location: <%= studio.location %></p>
     <h2>Movies: </h2>
     <% studio.movies.each do |movie| %>
       <%= link_to movie.title, "/movies/#{movie.id}" %>

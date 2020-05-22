@@ -29,6 +29,7 @@ describe 'us4 - Movie Index' do
     within("#actor-#{actor100.id}")do
       expect(page).to have_content("Name: #{actor100.name}")
       expect(page).to have_content("Age: #{actor100.age}")
+      expect(page).to_not have_content("Age: #{actor110.name}")
     end
     within("#associates")do
       expect(page).to have_content("Actors #{actor100.name} has worked with:")

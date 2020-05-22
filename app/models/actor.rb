@@ -5,6 +5,10 @@ class Actor <ApplicationRecord
 
   def associates
     movies.joins(:actors).where('name !=?', self.name).distinct.pluck(:name)
+    #tried to get this into alphabetical order, but had touble with order. Tried the following
+    # movies.joins(:actors).where('name !=?', self.name).order('actors.name').distinct.pluck(:name)
+    # movies.joins(:actors).where('name !=?', self.name).order('actor.name').distinct.pluck(:name)
+    # movies.joins(:actors).where('name !=?', self.name).order(:name).distinct.pluck(:name)
   end
 
 end

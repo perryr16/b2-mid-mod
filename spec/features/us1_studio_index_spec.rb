@@ -17,6 +17,9 @@ describe 'us1 - Studio Index' do
 
     within("#studio-#{studio1.id}")do
       expect(page).to have_content("Studio: #{studio1.name}")
+      expect(page).to_not have_content("Studio: #{studio2.name}")
+      expect(page).to have_content("Location: #{studio1.location}")
+      expect(page).to_not have_content("Location: #{studio3.location}")
       expect(page).to have_content("Movies:")
       expect(page).to have_link(movie01.title)
       expect(page).to have_link(movie11.title)
@@ -25,6 +28,7 @@ describe 'us1 - Studio Index' do
     end
     within("#studio-#{studio2.id}")do
       expect(page).to have_content("Studio: #{studio2.name}")
+      expect(page).to have_content("Location: #{studio2.location}")
       expect(page).to have_content("Movies:")
       expect(page).to have_link(movie02.title)
       expect(page).to have_link(movie22.title)
@@ -33,6 +37,7 @@ describe 'us1 - Studio Index' do
     end
     within("#studio-#{studio3.id}")do
       expect(page).to have_content("Studio: #{studio3.name}")
+      expect(page).to have_content("Location: #{studio3.location}")
       expect(page).to have_content("Movies:")
       expect(page).to have_link(movie03.title)
       expect(page).to have_link(movie33.title)
