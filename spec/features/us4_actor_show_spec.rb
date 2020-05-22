@@ -1,13 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe Actor do
-  describe "relationships"do
-    it {should have_many :movie_actors}
-    it {should have_many(:movies).through(:movie_actors)}
-
-  end
-
-  it "returns actors they have worked with (associates)" do
+describe 'us4 - Movie Index' do
+  it "studio index has all studios, under each are their movies" do
     studio1 = Studio.create(name: "studio01", location: "location01")
 
     movie01 = studio1.movies.create(title: "movie01", year: "2001", genre: "genre1")
@@ -17,7 +11,7 @@ RSpec.describe Actor do
 
     actor100 = Actor.create(name: "name100", age: 100)
     actor110 = Actor.create(name: "name110", age: 110)
-    actor111 = Actor.create(name: "name111", age: 103)
+    actor111 = Actor.create(name: "name103", age: 103)
     actor222 = Actor.create(name: "name222", age: 222)
     actor999 = Actor.create(name: "name999", age: 999)
 
@@ -30,9 +24,26 @@ RSpec.describe Actor do
     MovieActor.create(movie_id: movie02.id, actor_id: actor222.id)
     MovieActor.create(movie_id: movie04.id, actor_id: actor999.id)
 
-    expect(actor100.associates.include?("name110")).to eq(true)
-    expect(actor100.associates.include?("name111")).to eq(true)
-    expect(actor100.associates.include?("name222")).to eq(true)
-    expect(actor100.associates.include?("name999")).to eq(false)
+    visit "/actors/#{actor100.id}"
+
+    within("#actor-#{actor100.id}")do
+      expect(page).to have_content("Name: #{actor100.name}")
+      expect(page).to have_content("Age: #{actor100.age}")
+    end
+    within("#associates")do
+      expect(page).to have_content("Actors #{actor100.name} has worked with:")
+      expect(page).to have_content(actor110.name)
+      expect(page).to have_content(actor111.name)
+      expect(page).to have_content(actor222.name)
+    end
+    expect(page).to_not have_content(actor999.name)
+
   end
 end
+
+# Story 4 - ACTOR SHOW - list all quniq actors they've worked with
+# As a visitor,
+# When I visit an actor's show page
+# I see that actors name and age
+# And I see a unique list of all of the actors this particular
+# actor has worked with.

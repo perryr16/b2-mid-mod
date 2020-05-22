@@ -1,0 +1,11 @@
+<section id="actor-<%= @actor.id %>">
+  <h1>Name: <%= @actor.name %></h1>
+  <p>Age: <%= @actor.age %></p>
+</section>
+
+<section id="associates">
+  <h3>Actors <%= @actor.name %> has worked with: </h3>
+  <% @actor.associates.each do |name| %>
+    <p><%= name %></p>
+  <% end %>
+</section>
