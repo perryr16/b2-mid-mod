@@ -4,10 +4,10 @@ class Actor <ApplicationRecord
   has_many :movies, through: :movie_actors
 
   def associates
-
-    # movies.joins(:actors).where('name !=?', self.name).distinct.pluck(:name)
     movies.joins(:actors).where('name !=?', self.name).order("name").distinct.pluck(:name).join(", ")
-
+    # I had trouble with the `order` method.
+    # Is there a way to order by the join table name without using a sql injection?
+    # it would have been nice to have .order(actor.name)... or something like that
   end
 
 end
