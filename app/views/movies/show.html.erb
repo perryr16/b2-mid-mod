@@ -10,3 +10,11 @@
   <% end %>
   <p>Average Actor Age: <%= @movie.avg_actor_age %></p>
 </section>
+
+<section id="add-actor-form">
+  <%= form_tag "/movies/#{@movie.id}/add_actor", method: :put do%>
+    <%= label_tag :name%>
+    <%= text_field_tag :name %>
+    <%= submit_tag "Add Actor to Movie"%>
+  <% end %>
+</section>
