@@ -30,9 +30,10 @@ RSpec.describe Actor do
     MovieActor.create(movie_id: movie02.id, actor_id: actor222.id)
     MovieActor.create(movie_id: movie04.id, actor_id: actor999.id)
 
-    expect(actor100.associates.include?("name110")).to eq(true)
-    expect(actor100.associates.include?("name111")).to eq(true)
-    expect(actor100.associates.include?("name222")).to eq(true)
-    expect(actor100.associates.include?("name999")).to eq(false)
+    expect(actor100.associates).to eq("name110, name111, name222")
+    # expect(actor100.associates.include?("name110")).to eq(true)
+    # expect(actor100.associates.include?("name111")).to eq(true)
+    # expect(actor100.associates.include?("name222")).to eq(true)
+    # expect(actor100.associates.include?("name999")).to eq(false)
   end
 end

@@ -11,7 +11,7 @@ describe 'us4 - Movie Index' do
 
     actor100 = Actor.create(name: "name100", age: 100)
     actor110 = Actor.create(name: "name110", age: 110)
-    actor111 = Actor.create(name: "name103", age: 103)
+    actor111 = Actor.create(name: "name111", age: 103)
     actor222 = Actor.create(name: "name222", age: 222)
     actor999 = Actor.create(name: "name999", age: 999)
 
@@ -33,9 +33,8 @@ describe 'us4 - Movie Index' do
     end
     within("#associates")do
       expect(page).to have_content("Actors #{actor100.name} has worked with:")
-      expect(page).to have_content(actor110.name)
-      expect(page).to have_content(actor111.name)
-      expect(page).to have_content(actor222.name)
+      expect(page).to have_content("#{actor110.name}, #{actor111.name}, #{actor222.name}")
+
     end
     expect(page).to_not have_content(actor999.name)
 
