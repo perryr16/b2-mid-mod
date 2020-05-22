@@ -6,4 +6,4 @@ This repository requires and has been tested on Ruby v2.5.3 and is based on Rail
 
 RSpec and Shoulda-Matchers have been installed and set up.
 
-
+test
