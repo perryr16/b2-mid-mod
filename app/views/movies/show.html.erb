@@ -1,0 +1,12 @@
+<section id="movie-<%= @movie.id %>">
+  <h1>Title: <%= @movie.title %></h1>
+  <p>Creation Year: <%= @movie.year %></p>
+  <p>Genre: <%= @movie.genre %></p>
+</section>
+
+<section id="actors">
+  <% @movie.actors_by_age.each do |actor| %>
+    <h3 class="actor_link"><%= link_to actor.name, "/actors/#{actor.id}" %></h3>
+  <% end %>
+  <p>Average Actor Age: <%= @movie.avg_actor_age %></p>
+</section>
